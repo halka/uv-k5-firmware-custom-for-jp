@@ -48,6 +48,11 @@
 
 uint8_t gUnlockAllTxConfCnt;
 
+// Define F_LOCK_NONE if not already defined
+#ifndef F_LOCK_NONE
+#define F_LOCK_NONE 0
+#endif
+
 #ifdef ENABLE_F_CAL_MENU
 void writeXtalFreqCal(const int32_t value, const bool update_eeprom)
 {
@@ -500,8 +505,6 @@ void MENU_AcceptSetting(void)
         gTxVfo->CHANNEL_SAVE = gSubMenuSelection;
 #if 0
                 gEeprom.MrChannel[0] = gSubMenuSelection;
-#else
-        gEeprom.MrChannel[gEeprom.TX_VFO] = gSubMenuSelection;
 #endif
         gRequestSaveChannel = 2;
         gVfoConfigureMode = VFO_CONFIGURE_RELOAD;
@@ -540,13 +543,6 @@ void MENU_AcceptSetting(void)
         gEeprom.BACKLIGHT_MIN = MIN(gSubMenuSelection - 1, gEeprom.BACKLIGHT_MIN);
         break;
 
-    case MENU_ABR_ON_TX_RX:
-        gSetting_backlight_on_tx_rx = gSubMenuSelection;
-        break;
-
-    case MENU_TDR:
-        gEeprom.DUAL_WATCH = (gEeprom.TX_VFO + 1) * (gSubMenuSelection & 1);
-        gEeprom.CROSS_BAND_RX_TX = (gEeprom.TX_VFO + 1) * ((gSubMenuSelection & 2) > 0);
 
 #ifdef ENABLE_FEAT_F4HWN
         gDW = gEeprom.DUAL_WATCH;
@@ -637,10 +633,6 @@ void MENU_AcceptSetting(void)
         gEeprom.ALARM_MODE = gSubMenuSelection;
         break;
 #endif
-
-    case MENU_D_ST:
-        gEeprom.DTMF_SIDE_TONE = gSubMenuSelection;
-        break;
 
     case MENU_BAT_TXT:
         gSetting_battery_text = gSubMenuSelection;

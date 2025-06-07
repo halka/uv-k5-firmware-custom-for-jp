@@ -39,24 +39,8 @@ enum POWER_OnDisplayMode_t {
 typedef enum POWER_OnDisplayMode_t POWER_OnDisplayMode_t;
 
 enum TxLockModes_t {
-    F_LOCK_DEF, //all default frequencies + configurable
-    F_LOCK_FCC,
-#ifdef ENABLE_FEAT_F4HWN_CA
-    F_LOCK_CA,
-#endif
-    F_LOCK_CE,
-    F_LOCK_GB,
-    F_LOCK_430,
-    F_LOCK_438,
-#ifdef ENABLE_FEAT_F4HWN_PMR
-    F_LOCK_PMR,
-#endif
-#ifdef ENABLE_FEAT_F4HWN_GMRS_FRS_MURS
-    F_LOCK_GMRS_FRS_MURS,
-#endif
     F_LOCK_ALL, // disable TX on all frequencies
-    F_LOCK_NONE, // enable TX on all frequencies
-    F_LOCK_LEN
+    F_LOCK_LEN, 
 };
 
 /*
@@ -79,22 +63,6 @@ enum {
     DUAL_WATCH_CHAN_B
 };
 
-enum {
-    TX_OFFSET_FREQUENCY_DIRECTION_OFF = 0,
-    TX_OFFSET_FREQUENCY_DIRECTION_ADD,
-    TX_OFFSET_FREQUENCY_DIRECTION_SUB
-};
-
-enum {
-    OUTPUT_POWER_USER = 0,
-    OUTPUT_POWER_LOW1,
-    OUTPUT_POWER_LOW2,
-    OUTPUT_POWER_LOW3,
-    OUTPUT_POWER_LOW4,
-    OUTPUT_POWER_LOW5,
-    OUTPUT_POWER_MID,
-    OUTPUT_POWER_HIGH
-};
 
 enum ACTION_OPT_t {
     ACTION_OPT_NONE = 0,
@@ -102,7 +70,6 @@ enum ACTION_OPT_t {
     ACTION_OPT_POWER,
     ACTION_OPT_MONITOR,
     ACTION_OPT_SCAN,
-    ACTION_OPT_VOX,
     ACTION_OPT_ALARM,
     ACTION_OPT_FM,
     ACTION_OPT_1750,
@@ -114,18 +81,9 @@ enum ACTION_OPT_t {
 #ifdef ENABLE_FEAT_F4HWN
     ACTION_OPT_RXMODE,
     ACTION_OPT_MAINONLY,
-    ACTION_OPT_PTT,
     ACTION_OPT_WN,
     ACTION_OPT_BACKLIGHT,
     ACTION_OPT_MUTE,
-    #ifdef ENABLE_FEAT_F4HWN_RESCUE_OPS
-        ACTION_OPT_POWER_HIGH,
-        ACTION_OPT_REMOVE_OFFSET,
-    #endif
-#endif
-#ifdef ENABLE_REGA
-    ACTION_OPT_REGA_ALARM,
-    ACTION_OPT_REGA_TEST,
 #endif
     ACTION_OPT_LEN
 };
@@ -146,13 +104,6 @@ enum ALARM_Mode_t {
 };
 typedef enum ALARM_Mode_t ALARM_Mode_t;
 
-enum ROGER_Mode_t {
-    ROGER_MODE_OFF = 0,
-    ROGER_MODE_ROGER,
-    ROGER_MODE_MDC
-};
-typedef enum ROGER_Mode_t ROGER_Mode_t;
-
 enum CHANNEL_DisplayMode_t {
     MDF_FREQUENCY = 0,
     MDF_CHANNEL,
@@ -165,9 +116,6 @@ typedef struct {
     uint8_t               ScreenChannel[2]; // current channels set in the radio (memory or frequency channels)
     uint8_t               FreqChannel[2]; // last frequency channels used
     uint8_t               MrChannel[2]; // last memory channels used
-#ifdef ENABLE_NOAA
-    uint8_t           NoaaChannel[2];
-#endif
 
     // The actual VFO index (0-upper/1-lower) that is now used for RX, 
     // It is being alternated by dual watch, and flipped by crossband
@@ -175,7 +123,6 @@ typedef struct {
 
     // The main VFO index (0-upper/1-lower) selected by the user
     // 
-    uint8_t               TX_VFO;
 
     uint8_t               field7_0xa;
     uint8_t               field8_0xb;
@@ -190,17 +137,10 @@ typedef struct {
 #endif
 
     uint8_t               SQUELCH_LEVEL;
-    uint8_t               TX_TIMEOUT_TIMER;
     bool                  KEY_LOCK;
 #ifdef ENABLE_FEAT_F4HWN
     bool                  KEY_LOCK_PTT;
 #endif
-#ifdef ENABLE_FEAT_F4HWN_RESCUE_OPS
-    bool                  MENU_LOCK;
-    uint8_t               SET_KEY;
-#endif
-    bool                  VOX_SWITCH;
-    uint8_t               VOX_LEVEL;
 #ifdef ENABLE_VOICE
     VOICE_Prompt_t    VOICE_PROMPT;
 #endif
@@ -209,7 +149,6 @@ typedef struct {
     bool                  TAIL_TONE_ELIMINATION;
     bool                  VFO_OPEN;
     uint8_t               DUAL_WATCH;
-    uint8_t               CROSS_BAND_RX_TX;
     uint8_t               BATTERY_SAVE;
     uint8_t               BACKLIGHT_TIME;
     uint8_t               SCAN_RESUME_MODE;
@@ -233,7 +172,6 @@ typedef struct {
     ALARM_Mode_t      ALARM_MODE;
 #endif
     POWER_OnDisplayMode_t POWER_ON_DISPLAY_MODE;
-    ROGER_Mode_t          ROGER;
     uint8_t               REPEATER_TAIL_TONE_ELIMINATION;
     uint8_t               KEY_1_SHORT_PRESS_ACTION;
     uint8_t               KEY_1_LONG_PRESS_ACTION;
@@ -242,40 +180,17 @@ typedef struct {
     uint8_t               MIC_SENSITIVITY;
     uint8_t               MIC_SENSITIVITY_TUNING;
     uint8_t               CHAN_1_CALL;
-#ifdef ENABLE_DTMF_CALLING
-    char                  ANI_DTMF_ID[8];
-    char                  KILL_CODE[8];
-    char                  REVIVE_CODE[8];
-#endif
-    char                  DTMF_UP_CODE[16];
+
 
     uint8_t               field57_0x6c;
     uint8_t               field58_0x6d;
 
-    char                  DTMF_DOWN_CODE[16];
 
     uint8_t               field60_0x7e;
     uint8_t               field61_0x7f;
 
-#ifdef ENABLE_DTMF_CALLING
-    char                  DTMF_SEPARATE_CODE;
-    char                  DTMF_GROUP_CALL_CODE;
-    uint8_t               DTMF_DECODE_RESPONSE;
-    uint8_t               DTMF_auto_reset_time;
-#endif  
-    uint16_t              DTMF_PRELOAD_TIME;
-    uint16_t              DTMF_FIRST_CODE_PERSIST_TIME;
-    uint16_t              DTMF_HASH_CODE_PERSIST_TIME;
-    uint16_t              DTMF_CODE_PERSIST_TIME;
-    uint16_t              DTMF_CODE_INTERVAL_TIME;
-    bool                  DTMF_SIDE_TONE;
-#ifdef ENABLE_DTMF_CALLING
-    bool                  PERMIT_REMOTE_KILL;
-#endif
     int16_t               BK4819_XTAL_FREQ_LOW;
-#ifdef ENABLE_NOAA
-    bool              NOAA_AUTO_SCAN;
-#endif
+
     uint8_t               VOLUME_GAIN;
     #ifdef ENABLE_FEAT_F4HWN
         uint8_t           VOLUME_GAIN_BACKUP;
