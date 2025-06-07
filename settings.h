@@ -38,35 +38,6 @@ enum POWER_OnDisplayMode_t {
 };
 typedef enum POWER_OnDisplayMode_t POWER_OnDisplayMode_t;
 
-enum TxLockModes_t {
-    F_LOCK_DEF, //all default frequencies + configurable
-    F_LOCK_FCC,
-#ifdef ENABLE_FEAT_F4HWN_CA
-    F_LOCK_CA,
-#endif
-    F_LOCK_CE,
-    F_LOCK_GB,
-    F_LOCK_430,
-    F_LOCK_438,
-#ifdef ENABLE_FEAT_F4HWN_PMR
-    F_LOCK_PMR,
-#endif
-#ifdef ENABLE_FEAT_F4HWN_GMRS_FRS_MURS
-    F_LOCK_GMRS_FRS_MURS,
-#endif
-    F_LOCK_ALL, // disable TX on all frequencies
-    F_LOCK_NONE, // enable TX on all frequencies
-    F_LOCK_LEN
-};
-
-/*
-enum {
-    SCAN_RESUME_TO = 0,
-    SCAN_RESUME_CO,
-    SCAN_RESUME_SE
-};
-*/
-
 enum {
     CROSS_BAND_OFF = 0,
     CROSS_BAND_CHAN_A,
@@ -77,23 +48,6 @@ enum {
     DUAL_WATCH_OFF = 0,
     DUAL_WATCH_CHAN_A,
     DUAL_WATCH_CHAN_B
-};
-
-enum {
-    TX_OFFSET_FREQUENCY_DIRECTION_OFF = 0,
-    TX_OFFSET_FREQUENCY_DIRECTION_ADD,
-    TX_OFFSET_FREQUENCY_DIRECTION_SUB
-};
-
-enum {
-    OUTPUT_POWER_USER = 0,
-    OUTPUT_POWER_LOW1,
-    OUTPUT_POWER_LOW2,
-    OUTPUT_POWER_LOW3,
-    OUTPUT_POWER_LOW4,
-    OUTPUT_POWER_LOW5,
-    OUTPUT_POWER_MID,
-    OUTPUT_POWER_HIGH
 };
 
 enum ACTION_OPT_t {
@@ -145,13 +99,6 @@ enum ALARM_Mode_t {
     ALARM_MODE_TONE
 };
 typedef enum ALARM_Mode_t ALARM_Mode_t;
-
-enum ROGER_Mode_t {
-    ROGER_MODE_OFF = 0,
-    ROGER_MODE_ROGER,
-    ROGER_MODE_MDC
-};
-typedef enum ROGER_Mode_t ROGER_Mode_t;
 
 enum CHANNEL_DisplayMode_t {
     MDF_FREQUENCY = 0,
@@ -233,14 +180,11 @@ typedef struct {
     ALARM_Mode_t      ALARM_MODE;
 #endif
     POWER_OnDisplayMode_t POWER_ON_DISPLAY_MODE;
-    ROGER_Mode_t          ROGER;
     uint8_t               REPEATER_TAIL_TONE_ELIMINATION;
     uint8_t               KEY_1_SHORT_PRESS_ACTION;
     uint8_t               KEY_1_LONG_PRESS_ACTION;
     uint8_t               KEY_2_SHORT_PRESS_ACTION;
     uint8_t               KEY_2_LONG_PRESS_ACTION;
-    uint8_t               MIC_SENSITIVITY;
-    uint8_t               MIC_SENSITIVITY_TUNING;
     uint8_t               CHAN_1_CALL;
 #ifdef ENABLE_DTMF_CALLING
     char                  ANI_DTMF_ID[8];
