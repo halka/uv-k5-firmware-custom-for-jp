@@ -291,9 +291,7 @@ void FUNCTION_Select(FUNCTION_Type_t Function)
         return;
     }
 
-    if (Function == FUNCTION_TRANSMIT) {
-        FUNCTION_Transmit();
-    } else if (Function == FUNCTION_MONITOR) {
+    if (Function == FUNCTION_MONITOR) {
         gMonitor = true;
     }
 
