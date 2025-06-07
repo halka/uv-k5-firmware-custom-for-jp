@@ -149,7 +149,6 @@ Special thanks to Jean-Cyrille F6IWW (2 times), Fabrice 14RC123, David F4BPP, Ol
 * enabled AIR COPY
 * disabled ENABLE_DTMF_CALLING,
 * disabled SCRAMBLER,
-* remove 200Tx, 350Tx and 500Tx,
 * unlock TX on all bands needs only to be repeat 3 times,
 * code refactoring and many memory optimization,
 * and more...

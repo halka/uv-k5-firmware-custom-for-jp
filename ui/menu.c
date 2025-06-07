@@ -165,11 +165,11 @@ const t_menu_item MenuList[] =
     // enabled if pressing both the PTT and upper side button at power-on
     {"F Lock",      MENU_F_LOCK        },
 #ifndef ENABLE_FEAT_F4HWN
-    {"Tx 200",      MENU_200TX         }, // was "200TX"
-    {"Tx 350",      MENU_350TX         }, // was "350TX"
-    {"Tx 500",      MENU_500TX         }, // was "500TX"
+    // Removed: {"Tx 200",      MENU_200TX         }, // was "200TX"
+    // Removed: {"Tx 350",      MENU_350TX         }, // was "350TX"
+    // Removed: {"Tx 500",      MENU_500TX         }, // was "500TX"
 #endif
-    {"350 En",      MENU_350EN         }, // was "350EN"
+    // Removed: {"350 En",      MENU_350EN         }, // was "350EN"
 #ifndef ENABLE_FEAT_F4HWN
     {"ScraEn",      MENU_SCREN         }, // was "SCREN"
 #endif
