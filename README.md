@@ -1,6 +1,6 @@
 # Stats
 
-![Alt](https://repobeats.axiom.co/api/embed/947813147857755cef60a960d13734044b3b2c22.svg "Repobeats analytics image")
+![Alt](https://repobeats.axiom.co/api/embed/f80e2295e70715ee44559aca9b46730d4ee2f570.svg "Repobeats analytics image")
 
 # Open re-implementation of the Quansheng UV-K5/K6/5R v2.1.27 firmware
 
@@ -10,23 +10,14 @@ All is a cloned and customized version of DualTachyon's open firmware found [her
 
 > [!NOTE]
 > EN - About Chirp, as many others firmwares, you need to use a dedicated driver available on [this repository](https://github.com/armel/uv-k5-chirp-driver). 
->
-> _FR - A propos de Chirp, comme beaucoup d'autres firmwares, vous devez utiliser un pilote dédié disponible sur [ce dépôt](https://github.com/armel/uv-k5-chirp-driver)._
 
 > [!WARNING]
 > EN - THIS FIRMWARE HAS NO REAL BRAIN. PLEASE USE YOUR OWN. Use this firmware at your own risk (entirely). There is absolutely no guarantee that it will work in any way shape or form on your radio(s), it may even brick your radio(s), in which case, you'd need to buy another radio.
 Anyway, have fun.
->
-> _FR - CE FIRMWARE N'A PAS DE VÉRITABLE CERVEAU. VEUILLEZ UTILISER LE VÔTRE. Utilisez ce firmware à vos risques et périls. Il n'y a absolument aucune garantie qu'il fonctionnera d'une manière ou d'une autre sur votre (vos) radio(s), il peut même bousiller votre (vos) radio(s), dans ce cas, vous devrez acheter une autre radio. Quoi qu'il en soit, amusez-vous bien._
+
 
 > [!CAUTION]
 > EN - I recommend to backup your eeprom with [k5prog](https://github.com/sq5bpf/k5prog) before playing with alternative firmwares. It's a good reflex to have. 
->
-> _FR - Je recommande de sauvegarder votre eeprom avec [k5prog](https://github.com/sq5bpf/k5prog) avant de jouer avec des firmwares alternatifs. C'est un bon réflexe à avoir._
-
-# Donations
-
-Special thanks to Jean-Cyrille F6IWW (2 times), Fabrice 14RC123, David F4BPP, Olivier 14RC206, Frédéric F4ESO, Stéphane F5LGW, Jorge Ornelas (4 times), Laurent F4AXK, Christophe Morel, Clayton W0LED, Pierre Antoine F6FWB, Jean-Claude 14FRS3306, Thierry F4GVO, Eric F1NOU, PricelessToolkit, Ady M6NYJ, Tom McGovern (3 times), Joseph Roth, Pierre-Yves Colin, Frank DJ7FG, Marcel Testaz, Brian Frobisher, Yannick F4JFO, Paolo Bussola, Dirk DL8DF, Levente Szőke (2 times), Bernard-Michel Herrera, Jérôme Saintespes, Paul Davies, RS (3 times), Johan F4WAT, Robert Wörle, Rafael Sundorf, Paul Harker, Peter Fintl, Pascal F4ICR (2 times), Mike DL2MF, Eric KI1C (2 times), Phil G0ELM, Jérôme Lambert, Meinhard Frank Günther, Eliot Vedel, Alfonso EA7KDF, Jean-François F1EVM, Robert DC1RDB, Ian KE2CHJ, Daryl VK3AWA, Roberto Brunelli, Robert Boardman and Stephen Oliver for their [donations](https://www.paypal.com/paypalme/F4HWN). That’s so kind of them. Thanks so much 🙏🏻
 
 ## Table of Contents
 
@@ -41,6 +32,10 @@ Special thanks to Jean-Cyrille F6IWW (2 times), Fabrice 14RC123, David F4BPP, Ol
 * [License](#license)
 * [Example changes/updates](#example-changesupdates)
 
+## Reduced Functions for Japan
+* TX Disabled
+* DTMF Disabled
+* Rescure Functions Disabled
 ## Main features and improvements from F4HWN:
 
 * several firmware versions:
@@ -149,7 +144,6 @@ Special thanks to Jean-Cyrille F6IWW (2 times), Fabrice 14RC123, David F4BPP, Ol
 * enabled AIR COPY
 * disabled ENABLE_DTMF_CALLING,
 * disabled SCRAMBLER,
-* remove 200Tx, 350Tx and 500Tx,
 * unlock TX on all bands needs only to be repeat 3 times,
 * code refactoring and many memory optimization,
 * and more...
@@ -220,7 +214,7 @@ You can get it from: https://releases.llvm.org/download.html
 
 This is the least demanding option as you don't have to install enything on your computer. All you need is Github account.
 
-1. Go to https://github.com/armel/uv-k5-firmware-custom
+1. Go to https://github.com/halka/uv-k5-firmware-custom-for-jp
 1. Click green `Code` button
 1. Change tab from `Local` to `Codespace`
 1. Click green `Create codespace on main` button
@@ -260,16 +254,16 @@ If you have docker installed you can use [compile-with-docker.bat](./compile-wit
     pip install --user --upgrade pip
     pip install crcmod
     mkdir c:\projects & cd /D c:/projects
-    git clone https://github.com/armel/uv-k5-firmware-custom.git
+    git clone https://github.com/halka/uv-k5-firmware-custom-for-jp.git
     ```
-3. From now on you can build the firmware by going to `c:\projects\uv-k5-firmware-custom` and running `win_make.bat` or by running a command line:
+3. From now on you can build the firmware by going to `c:\projects\uv-k5-firmware-custom-for-jp` and running `win_make.bat` or by running a command line:
     ```
-    cd /D c:\projects\uv-k5-firmware-custom
+    cd /D c:\projects\uv-k5-firmware-custom-for-jp
     win_make.bat
     ```
 4. To reset the repository and pull new changes run (!!! it will delete all your changes !!!):
     ```
-    cd /D c:\projects\uv-k5-firmware-custom
+    cd /D c:\projects\uv-k5-firmware-custom-for-jp
     git reset --hard & git clean -fd & git pull
     ```
 
@@ -279,6 +273,7 @@ I've left some notes in the win_make.bat file to maybe help with stuff.
 
 Many thanks to various people:
 
+* [armel (Armel FAUVEAU)](https://github.com/armel)
 * [Egzumer](https://github.com/egzumer)
 * [OneOfEleven](https://github.com/OneOfEleven)
 * [DualTachyon](https://github.com/DualTachyon)
