@@ -117,49 +117,15 @@ void GENERIC_Key_PTT(bool bKeyPressed)
 {
     gInputBoxIndex = 0;
 
-    if (!bKeyPressed || SerialConfigInProgress())
-    {   // PTT released
-        if (gCurrentFunction == FUNCTION_TRANSMIT) {    
-            // we are transmitting .. stop
-            if (gFlagEndTransmission) {
-                FUNCTION_Select(FUNCTION_FOREGROUND);
-            }
-            else {
-                APP_EndTransmission();
-
-                if (gEeprom.REPEATER_TAIL_TONE_ELIMINATION == 0)
-                    FUNCTION_Select(FUNCTION_FOREGROUND);
-                else
-                    gRTTECountdown_10ms = gEeprom.REPEATER_TAIL_TONE_ELIMINATION * 10;
-            }
-
-            gFlagEndTransmission = false;
-#ifdef ENABLE_VOX
-            gVOX_NoiseDetected = false;
-#endif
-            RADIO_SetVfoState(VFO_STATE_NORMAL);
-
-            if (gScreenToDisplay != DISPLAY_MENU)     // 1of11 .. don't close the menu
-                gRequestDisplayScreen = DISPLAY_MAIN;
-        }
-
-        return;
+    if (!bKeyPressed)
+    {  
+        return true;
+    }
+    else{
+        return false;
     }
 
     // PTT pressed
-
-
-    if (SCANNER_IsScanning()) { 
-        SCANNER_Stop(); // CTCSS/CDCSS scanning .. stop
-        goto cancel_tx;
-    }
-
-    if (gScanStateDir != SCAN_OFF) {    
-        CHFRSCANNER_Stop(); // frequency/channel scanning . .stop
-        goto cancel_tx;
-    }
-
-
 
 #ifdef ENABLE_FMRADIO
     if (gFM_ScanState != FM_SCAN_OFF) { // FM radio is scanning .. stop

@@ -29,7 +29,7 @@ enum center_line_t {
 
 enum Vfo_txtr_mode{
     VFO_MODE_NONE = 0,
-    VFO_MODE_TX = 1,
+    VFO_MODE_TX = 2,
     VFO_MODE_RX = 2,
 };
 

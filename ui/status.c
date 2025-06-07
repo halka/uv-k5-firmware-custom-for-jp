@@ -162,7 +162,7 @@ void UI_DisplayStatus()
                 else
                 {
                 #endif
-                    uint8_t dw = (gEeprom.DUAL_WATCH != DUAL_WATCH_OFF) + (gEeprom.CROSS_BAND_RX_TX != CROSS_BAND_OFF) * 2;
+                    uint8_t dw = (gEeprom.DUAL_WATCH != DUAL_WATCH_OFF) * 2;
                     if(dw == 1 || dw == 3) { // DWR - dual watch + respond
                         if(gDualWatchActive)
                             memcpy(line + x + (dw==1?0:2), gFontDWR, sizeof(gFontDWR) - (dw==1?0:5));
@@ -228,22 +228,23 @@ void UI_DisplayStatus()
         size = sizeof(gFontF);
         #endif
     }
-    #ifdef ENABLE_FEAT_F4HWN
-        else if (gMute) {
-            src = gFontMute;
-            size = sizeof(gFontMute);
-        }
-    #endif
-    else if (gBackLight) {
+#ifdef ENABLE_FEAT_F4HWN
+    else if (gMute) {
+        src = gFontMute;
+        size = sizeof(gFontMute);
+    }
+#
+    else if (gBacklight) {
         src = gFontLight;
         size = sizeof(gFontLight);
     }
-    #ifdef ENABLE_FEAT_F4HWN_CHARGING_C
+    #endif
+#ifdef ENABLE_FEAT_F4HWN_CHARGING_C
     else if (gChargingWithTypeC) {
         src = BITMAP_USB_C;
         size = sizeof(BITMAP_USB_C);
     }
-    #endif
+#endif
 
     // Perform the memcpy if a source was selected
     if (src) {
@@ -251,7 +252,7 @@ void UI_DisplayStatus()
     }
 
     // Battery
-    unsigned int x2 = LCD_WIDTH - sizeof(BITMAP_BatteryLevel1) - 0;
+    unsigned int x2 = LCD_WIDTH - sizeof(BITMAP_BatteryLevel1);
 
     UI_DrawBattery(line + x2, gBatteryDisplayLevel, gLowBatteryBlink);
 

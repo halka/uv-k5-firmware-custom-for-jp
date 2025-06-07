@@ -78,12 +78,6 @@ void (*action_opt_table[])(void) = {
     [ACTION_OPT_FLASHLIGHT] = &FUNCTION_NOP,
 #endif
 
-#ifdef ENABLE_VOX
-    [ACTION_OPT_VOX] = &ACTION_Vox,
-#else
-    [ACTION_OPT_VOX] = &FUNCTION_NOP,
-#endif
-
 #ifdef ENABLE_FMRADIO
     [ACTION_OPT_FM] = &ACTION_FM,
 #else
@@ -111,7 +105,6 @@ void (*action_opt_table[])(void) = {
 #ifdef ENABLE_FEAT_F4HWN
     [ACTION_OPT_RXMODE] = &ACTION_RxMode,
     [ACTION_OPT_MAINONLY] = &ACTION_MainOnly,
-    [ACTION_OPT_PTT] = &ACTION_Ptt,
     [ACTION_OPT_WN] = &ACTION_Wn,
     [ACTION_OPT_BACKLIGHT] = &ACTION_BackLight,
     #if !defined(ENABLE_SPECTRUM) || !defined(ENABLE_FMRADIO)
@@ -123,8 +116,6 @@ void (*action_opt_table[])(void) = {
         [ACTION_OPT_POWER_HIGH] = &ACTION_Power_High,
         [ACTION_OPT_REMOVE_OFFSET] = &ACTION_Remove_Offset,
     #endif
-#else
-    [ACTION_OPT_RXMODE] = &FUNCTION_NOP,
 #endif
 #ifdef ENABLE_REGA
     [ACTION_OPT_REGA_ALARM] = &ACTION_RegaAlarm,
@@ -136,11 +127,7 @@ static_assert(ARRAY_SIZE(action_opt_table) == ACTION_OPT_LEN);
 
 void ACTION_Power(void)
 {
-    if (++gTxVfo->OUTPUT_POWER > OUTPUT_POWER_HIGH)
-        gTxVfo->OUTPUT_POWER = OUTPUT_POWER_LOW1;
-
     gRequestSaveChannel = 1;
-
     gRequestDisplayScreen = gScreenToDisplay;
 
 #ifdef ENABLE_VOICE
@@ -547,7 +534,6 @@ void ACTION_MainOnly(void)
 
 void ACTION_Ptt(void)
 {
-    gSetting_set_ptt_session = !gSetting_set_ptt_session;
 }
 
 void ACTION_Wn(void)

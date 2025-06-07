@@ -307,7 +307,6 @@ volatile uint8_t  boot_counter_10ms;
 uint8_t           gIsLocked = 0xFF;
 
 
-#ifdef ENABLE_FEAT_F4HWN
     bool          gK5startup = true;
     bool          gBackLight = false;
     bool          gMute = false;
@@ -315,7 +314,6 @@ uint8_t           gIsLocked = 0xFF;
     uint8_t       gBacklightBrightnessOld;
     uint8_t       gPttOnePushCounter = 0;
     uint32_t      gBlinkCounter = 0;
-#endif
 
 inline void FUNCTION_NOP() { ; }
 

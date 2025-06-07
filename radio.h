@@ -134,6 +134,9 @@ typedef struct VFO_Info_t
     char           Name[16];
 } VFO_Info_t;
 
+uint8_t SQL_TONE;
+
+
 // Settings of the main VFO that is selected by the user
 // The pointer follows gEeprom.TX_VFO index
 extern VFO_Info_t    *gTxVfo;

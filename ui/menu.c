@@ -725,34 +725,8 @@ void UI_DisplayMenu(void)
                 break;
         #endif
 
-#ifdef ENABLE_DTMF_CALLING
-        case MENU_ANI_ID:
-            strcpy(String, gEeprom.ANI_DTMF_ID);
-            break;
-#endif
-        case MENU_UPCODE:
-            sprintf(String, "%.8s\n%.8s", gEeprom.DTMF_UP_CODE, gEeprom.DTMF_UP_CODE + 8);
-            break;
-
-        case MENU_DWCODE:
-            sprintf(String, "%.8s\n%.8s", gEeprom.DTMF_DOWN_CODE, gEeprom.DTMF_DOWN_CODE + 8);
-            break;
-
-#ifdef ENABLE_DTMF_CALLING
-        case MENU_D_RSP:
-            strcpy(String, gSubMenu_D_RSP[gSubMenuSelection]);
-            break;
-
-        case MENU_D_HOLD:
-            sprintf(String, "%ds", gSubMenuSelection);
-            break;
-#endif
         case MENU_D_PRE:
             sprintf(String, "%d*10ms", gSubMenuSelection);
-            break;
-
-        case MENU_PTT_ID:
-            strcpy(String, gSubMenu_PTT_ID[gSubMenuSelection]);
             break;
 
         case MENU_BAT_TXT:
@@ -771,10 +745,6 @@ void UI_DisplayMenu(void)
 
         case MENU_PONMSG:
             strcpy(String, gSubMenu_PONMSG[gSubMenuSelection]);
-            break;
-
-        case MENU_ROGER:
-            strcpy(String, gSubMenu_ROGER[gSubMenuSelection]);
             break;
 
         case MENU_VOL:
